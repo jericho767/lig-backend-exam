@@ -8,27 +8,34 @@ import Button from 'components/Button';
 import Post from 'components/Post/Post';
 
 import * as postActions from 'redux/modules/post';
+import * as commentsActions from 'redux/modules/comments';
 import * as routes from 'utils/routes';
 import './PostDetails.scss';
 
 class PostDetails extends Component {
 
   componentDidMount() {
-    let { match, getPost } = this.props;
+    let { match, getPost, getComments } = this.props;
 
     if (match.params.slug) {
-      getPost(match.params.slug);
+      getPost(match.params.slug)
+        .then((post) => {
+          getComments(post);
+        });
     }
   }
 
   render() {
-    let { post } = this.props;
+    let { post, comments } = this.props;
 
     if (!post.id) return null;
 
     return (
       <div className="post-details">
-        <Post post={post} />
+        <Post
+          post={post}
+          comments={comments}
+        />
         <div className="post-details-top-button">
           <Button
             type="link"
@@ -44,8 +51,8 @@ class PostDetails extends Component {
 
 export default compose(
   connect(
-    state => ({ post: state.post }),
-    dispatch => bindActionCreators(postActions, dispatch)
+    state => ({ post: state.post, comments: state.comments }),
+    dispatch => bindActionCreators({ ...postActions, ...commentsActions }, dispatch)
   ),
   withRouter
 )(PostDetails);

@@ -25,10 +25,11 @@ export function getPost(id) {
     return axios({
       baseURL: config.api,
       url: '/posts/' + id,
-      method: 'GET',
+      method: 'GET'
     })
     .then((res) => {
       dispatch(setPost(res.data.data));
+      return res.data.data;
     });
   };
 }
