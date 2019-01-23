@@ -1,0 +1,11 @@
+import { combineReducers } from 'redux';
+
+import user from './user';
+import post from './post';
+import posts from './posts';
+
+export default combineReducers({
+  user,
+  post,
+  posts
+});

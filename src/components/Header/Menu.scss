@@ -1,0 +1,52 @@
+@import '~assets/scss/variables';
+
+.header-menu {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.header-menu-button {
+  position: absolute;
+  background-color: $border-color;
+  width: 40px;
+  height: 3px;
+  top: 14px;
+
+  &.is-open {
+    background-color: transparent;
+
+    &:before, &:after {
+      top: 0;
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:before, &:after {
+    position: absolute;
+    content: '';
+    background-color: $border-color;
+    width: 40px;
+    height: 3px;
+    transition: transform 0.5s;
+    transform: rotate(0deg);
+  }
+
+  &:before {
+    top: -14px;
+  }
+
+  &:after {
+    top: 14px;
+  }
+}

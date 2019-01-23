@@ -1,0 +1,45 @@
+@import '~assets/scss/variables';
+
+.post-comment {
+  border-bottom: 2px solid $border-color;
+  padding: 10px 0;
+}
+
+.post-comment-username {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 0.025em;
+  display: inline-block;
+}
+
+.post-comment-date {
+  color: $border-color;
+  font-size: 12px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.post-comment-message {
+  font-size: 15px;
+  margin: 3px;
+}
+
+.post-comment-reply-button, .post-comment-send-button {
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 3px;
+}
+
+.post-comment-reply-text {
+  width: 100%;
+  border: 1px solid $border-color;
+  margin-top: 10px;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.post-comment-send-button {
+  margin-top: 5px;
+  float: right;
+}

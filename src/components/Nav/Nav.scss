@@ -1,0 +1,39 @@
+@import '~assets/scss/variables';
+
+.nav {
+  position: fixed;
+  height: 100vh;
+  width: $site-size;
+  background-color: #fff;
+  text-align: center;
+  padding-top: 150px;
+  display: none;
+
+  &.is-open {
+    display: block;
+  }
+
+  &.is-admin {
+    background-color: $gray-dark;
+  }
+}
+
+.nav-link {
+  color: $gray-dark;
+  font-size: 30px;
+  line-height: 1;
+  text-decoration: none;
+  margin: 15px 0;
+  display: inline-block;
+  letter-spacing: 0.025em;
+  font-weight: bold;
+
+  .is-admin & {
+    color: #fff;
+  }
+}
+
+.nav-list {
+  list-style-type:none;
+  margin: 0 auto;
+}

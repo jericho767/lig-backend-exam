@@ -1,0 +1,19 @@
+@import '~assets/scss/variables';
+
+.post-admin-form-label {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: $gray-light;
+  display: block;
+}
+
+.post-admin-form-text {
+  border: 2px solid $gray-light;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  font-size: 20px;
+  padding: 17px;
+  width: 100%;
+}

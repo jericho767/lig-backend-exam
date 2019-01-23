@@ -1,0 +1,30 @@
+@import '~assets/scss/variables.scss';
+
+.post-admin-card {
+  border-top: 2px solid $gray-light;
+  padding: 10px 0;
+}
+
+.post-admin-card-link {
+  text-decoration: none;
+  color: #000;
+
+  &:visited {
+    color: #000;
+  }
+}
+
+.post-admin-card-date {
+  font-size: 15px;
+  color: $gray-light;
+  text-transform: uppercase;
+  line-height: 2;
+  letter-spacing: 0.03em;
+}
+
+.post-admin-card-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: 0.025em;
+}

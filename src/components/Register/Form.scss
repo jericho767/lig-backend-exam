@@ -1,0 +1,31 @@
+@import '~assets/scss/variables';
+
+.register-form {
+  padding-bottom: 20px;
+}
+
+.register-form-label {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: $gray-light;
+  display: block;
+}
+
+.register-form-text {
+  border: 2px solid $gray-light;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  font-size: 20px;
+  padding: 17px;
+  width: 100%;
+}
+
+.register-form-error {
+  display: inline-block;
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
+}

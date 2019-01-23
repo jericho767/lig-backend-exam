@@ -1,0 +1,36 @@
+@import '~assets/scss/variables';
+
+.login-form {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.login-form-label {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: $gray-light;
+  display: block;
+}
+
+.login-form-text {
+  border: 2px solid $gray-light;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  font-size: 20px;
+  padding: 17px;
+  width: 100%;
+}
+
+.login-form-error {
+  display: inline-block;
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.login-form-button {
+  margin-top: 10px;
+}

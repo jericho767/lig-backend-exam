@@ -1,0 +1,46 @@
+@import '~assets/scss/variables';
+
+.post-image {
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 243px;
+}
+
+.post-info {
+  padding: 12px 20px;
+}
+
+.post-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.333;
+  letter-spacing: 0.025em;
+}
+
+.post-date {
+  font-size: 15px;
+  line-height: 2;
+  color: $border-color;
+  text-transform: uppercase;
+  display: inline-block;
+  padding-top: 3px;
+  letter-spacing: 0.05em;
+}
+
+.post-content {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-top: 25px;
+}
+
+.post-comments {
+  padding: 0px 20px 10px;
+}
+
+.post-comment-reply-title {
+  font-weight: bold;
+  margin-top: 15px;
+  font-size: 15px;
+}

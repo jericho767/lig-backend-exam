@@ -1,0 +1,8 @@
+.header {
+  position: relative;
+  padding: 20px;
+
+  &.is-admin {
+    background-color: #333;
+  }
+}

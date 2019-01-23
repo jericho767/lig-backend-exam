@@ -1,0 +1,10 @@
+@import '~assets/scss/variables.scss';
+
+.post-admin-list {
+  padding: 20px 0;
+  list-style-type: none;
+}
+
+.post-admin-list-item:last-child {
+  border-bottom: 2px solid $gray-light;
+}
