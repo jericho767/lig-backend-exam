@@ -1,6 +1,6 @@
 Examination Rules:
 
-- You can use any framework and/or library you like
+- You can use any php framework and/or library you like
 - You can bring your own laptop or use provided MacBook Air
 - Use of internet is allowed
 - Asking for help is not allowed
