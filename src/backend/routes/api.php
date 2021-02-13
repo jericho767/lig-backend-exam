@@ -28,10 +28,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::group(['prefix' => '{slug}'], function () {
             Route::patch('', [PostController::class, 'update'])->name('update');
 
-            Route::group(['prefix' => 'comments'], function () {
-                Route::post('', [CommentController::class, 'create'])->name('comment');
-                Route::patch('{id}', [CommentController::class, 'update'])->name('comment.update');
-                Route::delete('{id}', [CommentController::class, 'delete'])->name('comment.delete');
+            Route::group(['prefix' => 'comments', 'as' => 'comment.'], function () {
+                Route::post('', [CommentController::class, 'create'])->name('create');
+                Route::patch('{id}', [CommentController::class, 'update'])->name('update');
+                Route::delete('{id}', [CommentController::class, 'delete'])->name('delete');
             });
         });
     });
@@ -43,8 +43,8 @@ Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
     Route::group(['prefix' => '{slug}'], function () {
         Route::get('', [PostController::class, 'get'])->name('get');
 
-        Route::group(['prefix' => 'comments'], function () {
-            Route::get('', [CommentController::class, 'byPostSlug'])->name('comments');
+        Route::group(['prefix' => 'comments', 'as' => 'comment.'], function () {
+            Route::get('', [CommentController::class, 'byPostSlug'])->name('get');
         });
     });
 });
