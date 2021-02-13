@@ -41,7 +41,7 @@ class PostController extends Controller
      */
     public function get(SlugPostRequest $request): PostResource
     {
-        return PostResource::make($this->postService->getPost($request->getSlug()));
+        return new PostResource($this->postService->getPost($request->getSlug()), true);
     }
 
     /**

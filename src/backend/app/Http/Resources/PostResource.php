@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class PostResource extends BaseResource
 {
+    private $isWrap;
+
+    public function __construct($resource, bool $isWrap = false)
+    {
+        parent::__construct($resource);
+        $this->isWrap = $isWrap;
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -19,8 +27,7 @@ class PostResource extends BaseResource
     {
         /** @var Post $post */
         $post = $this->resource;
-
-        return [
+        $data = [
             'id' => $post->getAttribute('id'),
             'user_id' => $post->getAttribute('user_id'),
             'title' => $post->getAttribute('title'),
@@ -40,5 +47,11 @@ class PostResource extends BaseResource
                 }
             }),
         ];
+
+        if ($this->isWrap) {
+            return ['data' => $data];
+        } else {
+            return $data;
+        }
     }
 }
