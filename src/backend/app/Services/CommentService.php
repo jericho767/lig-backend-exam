@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -22,6 +23,19 @@ class CommentService
         $comment = Comment::query()->find($id);
 
         return $comment;
+    }
+
+    /**
+     * Delete a comment.
+     *
+     * @param int $id
+     * @return bool|null
+     * @throws Exception
+     */
+    public function delete(int $id): ?bool
+    {
+        $comment = $this->getCommentById($id);
+        return $comment->delete();
     }
 
     /**

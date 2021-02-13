@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\SlugPostRequest;
-use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Requests\ModifyCommentRequest;
 use App\Http\Resources\CommentResource;
 use App\Services\CommentService;
 use App\Services\PostService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CommentController extends Controller
@@ -51,11 +53,27 @@ class CommentController extends Controller
     /**
      * Update a comment.
      *
-     * @param UpdateCommentRequest $request
+     * @param ModifyCommentRequest $request
      * @return CommentResource
      */
-    public function updateComment(UpdateCommentRequest $request): CommentResource
+    public function updateComment(ModifyCommentRequest $request): CommentResource
     {
         return CommentResource::make($this->commentService->update($request->getBody(), $request->getId()));
+    }
+
+    /**
+     * Delete a comment.
+     *
+     * @param ModifyCommentRequest $request
+     * @return JsonResponse|null
+     * @throws Exception
+     */
+    public function delete(ModifyCommentRequest $request): ?JsonResponse
+    {
+        if ($this->commentService->delete($request->getId())) {
+            return response()->json(['status' => __('comments.deleted')]);
+        }
+
+        return null;
     }
 }

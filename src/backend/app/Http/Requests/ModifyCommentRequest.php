@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Services\CommentService;
 use Illuminate\Validation\Rule;
 
-class UpdateCommentRequest extends CommentRequest
+class ModifyCommentRequest extends CommentRequest
 {
     private $commentService;
 
@@ -39,7 +39,7 @@ class UpdateCommentRequest extends CommentRequest
             /** @var User $user */
             $user = $this->user();
 
-            // Can update comment only if the user is the owner of the comment
+            // Can modify comment only if the user is the owner of the comment
             return $user->getAttribute('id') === $comment->getAttribute('creator_id');
         }
 
@@ -58,6 +58,11 @@ class UpdateCommentRequest extends CommentRequest
         $rules['id'] = [
             Rule::exists((new Comment())->getTable(), 'id'),
         ];
+
+        if ($this->route()->getActionMethod() === 'delete') {
+            // No need for checking of the body if the method is delete.
+            unset($rules['body']);
+        }
 
         return $rules;
     }

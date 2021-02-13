@@ -37,6 +37,9 @@ Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
             Route::patch('{id}', [CommentController::class, 'updateComment'])
                 ->middleware(['auth:sanctum'])
                 ->name('comment.update');
+            Route::delete('{id}', [CommentController::class, 'delete'])
+                ->middleware(['auth:sanctum'])
+                ->name('comment.delete');
         });
     });
 });
