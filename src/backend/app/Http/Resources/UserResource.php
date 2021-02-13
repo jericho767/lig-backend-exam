@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class UserResource extends BaseResource
 {
+    public static $wrap = false;
+
     /**
      * Transform the resource into an array.
      *
