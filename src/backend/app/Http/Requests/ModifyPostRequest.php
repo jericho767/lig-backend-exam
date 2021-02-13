@@ -50,6 +50,11 @@ class ModifyPostRequest extends SlugPostRequest
      */
     public function rules(): array
     {
+        if ($this->route()->getActionMethod() === 'delete') {
+            // For delete action, the only rule is the validity of the slug
+            return parent::rules();
+        }
+
         return array_merge(
             ['title' => AddPostRequest::POST_RULES['title']],
             parent::rules()

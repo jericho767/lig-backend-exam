@@ -8,6 +8,8 @@ use App\Http\Requests\SlugPostRequest;
 use App\Http\Resources\PostResource;
 use App\Services\ImageService;
 use App\Services\PostService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PostController extends Controller
@@ -78,5 +80,21 @@ class PostController extends Controller
     public function update(ModifyPostRequest $request): PostResource
     {
         return PostResource::make($this->postService->updateTitle($request->getSlug(), $request->getTitle()));
+    }
+
+    /**
+     * Delete a post.
+     *
+     * @param ModifyPostRequest $request
+     * @return JsonResponse|null
+     * @throws Exception
+     */
+    public function delete(ModifyPostRequest $request): ?JsonResponse
+    {
+        if ($this->postService->delete($request->getSlug())) {
+            return response()->json(['status' => __('posts.deleted')]);
+        }
+
+        return null;
     }
 }

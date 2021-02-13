@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         Route::group(['prefix' => '{slug}'], function () {
             Route::patch('', [PostController::class, 'update'])->name('update');
+            Route::delete('', [PostController::class, 'delete'])->name('delete');
 
             Route::group(['prefix' => 'comments', 'as' => 'comment.'], function () {
                 Route::post('', [CommentController::class, 'create'])->name('create');

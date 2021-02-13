@@ -4,11 +4,24 @@ namespace App\Services;
 
 use App\Models\Post;
 use App\Models\User;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 
 class PostService
 {
+    /**
+     * Delete a post.
+     *
+     * @param string $slug
+     * @return bool|null
+     * @throws Exception
+     */
+    public function delete(string $slug): ?bool
+    {
+        return $this->getPost($slug)->delete();
+    }
+
     /**
      * Update a post title given a post slug.
      *
