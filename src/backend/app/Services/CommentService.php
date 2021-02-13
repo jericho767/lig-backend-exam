@@ -34,8 +34,7 @@ class CommentService
      */
     public function delete(int $id): ?bool
     {
-        $comment = $this->getCommentById($id);
-        return $comment->delete();
+        return $this->getCommentById($id)->delete();
     }
 
     /**
