@@ -23,4 +23,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
     Route::get('', [PostController::class, 'index'])->name('list');
+    Route::get('{slug}', [PostController::class, 'get'])->name('get');
 });

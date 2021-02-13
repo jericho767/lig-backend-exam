@@ -19,4 +19,20 @@ class PostService
             ->forPage($page)
             ->paginate();
     }
+
+    /**
+     * Get a post given a slug.
+     *
+     * @param string $slug
+     * @return Post
+     */
+    public function getPost(string $slug): Post
+    {
+        /** @var Post $post */
+        $post = Post::query()
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        return $post;
+    }
 }
