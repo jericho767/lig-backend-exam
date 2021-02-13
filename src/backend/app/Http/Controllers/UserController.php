@@ -7,6 +7,8 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -22,15 +24,17 @@ class UserController extends Controller
      * Register a user.
      *
      * @param RegisterUserRequest $request
-     * @return UserResource
+     * @return JsonResponse
      */
-    public function register(RegisterUserRequest $request): UserResource
+    public function register(RegisterUserRequest $request): JsonResponse
     {
         return UserResource::make($this->userService->create([
             'email' => $request->getEmail(),
             'name' => $request->getName(),
             'password' => $request->getPassword(),
-        ]));
+        ]))
+        ->response()
+        ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**

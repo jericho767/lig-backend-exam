@@ -10,7 +10,7 @@ use App\Services\CommentService;
 use App\Services\PostService;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class CommentController extends Controller
 {
@@ -27,38 +27,44 @@ class CommentController extends Controller
      * Get the comments of a post given a slug.
      *
      * @param SlugPostRequest $request
-     * @return AnonymousResourceCollection
+     * @return JsonResponse
      */
-    public function byPostSlug(SlugPostRequest $request): AnonymousResourceCollection
+    public function byPostSlug(SlugPostRequest $request): JsonResponse
     {
-        return CommentResource::collection($this->commentService->getAllByPost($request->getSlug()));
+        return CommentResource::collection($this->commentService->getAllByPost($request->getSlug()))
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
      * Create a comment.
      *
      * @param AddCommentRequest $request
-     * @return CommentResource
+     * @return JsonResponse
      */
-    public function create(AddCommentRequest $request): CommentResource
+    public function create(AddCommentRequest $request): JsonResponse
     {
         return CommentResource::make(
             $this->commentService->create(
                 $request->getBody(),
                 $this->postService->getPost($request->getSlug()),
                 $request->user())
-        );
+        )
+        ->response()
+        ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
      * Update a comment.
      *
      * @param ModifyCommentRequest $request
-     * @return CommentResource
+     * @return JsonResponse
      */
-    public function update(ModifyCommentRequest $request): CommentResource
+    public function update(ModifyCommentRequest $request): JsonResponse
     {
-        return CommentResource::make($this->commentService->update($request->getBody(), $request->getId()));
+        return CommentResource::make($this->commentService->update($request->getBody(), $request->getId()))
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**

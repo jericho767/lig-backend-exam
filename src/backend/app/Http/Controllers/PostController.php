@@ -10,7 +10,7 @@ use App\Services\ImageService;
 use App\Services\PostService;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
@@ -26,31 +26,35 @@ class PostController extends Controller
     /**
      * Get the list of posts by page.
      *
-     * @return AnonymousResourceCollection
+     * @return JsonResponse
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): JsonResponse
     {
-        return PostResource::collection($this->postService->get(intval(request()->get('page'))));
+        return PostResource::collection($this->postService->get(intval(request()->get('page'))))
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
      * Get the post given the slug.
      *
      * @param SlugPostRequest $request
-     * @return PostResource
+     * @return JsonResponse
      */
-    public function get(SlugPostRequest $request): PostResource
+    public function get(SlugPostRequest $request): JsonResponse
     {
-        return PostResource::make($this->postService->getPost($request->getSlug()));
+        return PostResource::make($this->postService->getPost($request->getSlug()))
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
      * Create post.
      *
      * @param AddPostRequest $request
-     * @return PostResource
+     * @return JsonResponse
      */
-    public function create(AddPostRequest $request): PostResource
+    public function create(AddPostRequest $request): JsonResponse
     {
         // Create the post
         $post = $this->postService->create([
@@ -68,18 +72,22 @@ class PostController extends Controller
         // Load image relation of the post
         $post->load('image');
 
-        return PostResource::make($post);
+        return PostResource::make($post)
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
      * Update a post.
      *
      * @param ModifyPostRequest $request
-     * @return PostResource
+     * @return JsonResponse
      */
-    public function update(ModifyPostRequest $request): PostResource
+    public function update(ModifyPostRequest $request): JsonResponse
     {
-        return PostResource::make($this->postService->updateTitle($request->getSlug(), $request->getTitle()));
+        return PostResource::make($this->postService->updateTitle($request->getSlug(), $request->getTitle()))
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
