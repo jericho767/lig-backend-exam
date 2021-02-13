@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // Create users and posts
          User::factory(10)
-             ->has(Post::factory()->count(rand(1, 5)))
+             ->has(Post::factory()->count(rand(1, 5)), 'posts')
              ->create();
 
          // Create comments for posts
