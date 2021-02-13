@@ -6,14 +6,14 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\UserResource;
-use App\Services\AuthService;
+use App\Services\UserService;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     private $authService;
 
-    public function __construct(AuthService $service)
+    public function __construct(UserService $service)
     {
         $this->authService = $service;
     }
