@@ -2,9 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Post;
-use Illuminate\Validation\Rule;
-
 class CommentRequest extends SlugPostRequest
 {
     /**
@@ -24,16 +21,15 @@ class CommentRequest extends SlugPostRequest
      */
     public function rules(): array
     {
-        return [
-            'slug' => [
-                'required',
-                Rule::exists((new Post())->getTable(), 'slug'),
-            ],
-            'body' => [
-                'required',
-                'max:200',
-            ],
+        $rules = parent::rules();
+
+        // Add rules for the current route
+        $rules['body'] = [
+            'required',
+            'max:200',
         ];
+
+        return $rules;
     }
 
     /**
