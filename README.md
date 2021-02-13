@@ -40,7 +40,8 @@ TIMEZONE=Asia/Tokyo
 API_DOMAIN=api.app.local
 APP_DOMAIN=app.local
 ```
-Add the following lines to host file
+**Add the following lines to host file.**  
+(This is important because the allowed origin to access the backend is that specific domain)
 ```
 192.168.99.100    app.local api.app.local
 ```
@@ -91,18 +92,15 @@ Add full permissions to the storage directory
 chmod 777 -R storage/
 ```
 
-## PSR2 Coding Style
-Running the coding standards fixer container
+## Setup frontend
+Create build files for frontend.
+```
+docker-compose run node npm run build
+```
 
-To check without applying any fixes, run the following command:
+## Access Site
+Fire up internet explorer and open up:
 ```
-docker-compose run fixer fix --dry-run -v
+https://app.local/
 ```
-To fix all your PHP code to adhere the PSR2 Coding style, run:
-```
-docker-compose run fixer fix
-```
-To apply fix only to a specific file
-```
-docker-compose run fixer fix <<file_name>>
-```
+*Just press continue to app (unsafe), because it is self-signed (so it does that)
