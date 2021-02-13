@@ -21,28 +21,28 @@ Route::post('register', [UserController::class, 'register'])->name('register');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', [UserController::class, 'logout'])->name('logout');
+
+    Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
+        Route::post('', [PostController::class, 'create'])->name('create');
+
+        Route::group(['prefix' => '{slug}'], function () {
+            Route::group(['prefix' => 'comments'], function () {
+                Route::post('', [CommentController::class, 'create'])->name('comment');
+                Route::patch('{id}', [CommentController::class, 'update'])->name('comment.update');
+                Route::delete('{id}', [CommentController::class, 'delete'])->name('comment.delete');
+            });
+        });
+    });
 });
 
 Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
     Route::get('', [PostController::class, 'index'])->name('list');
-    Route::post('', [PostController::class, 'create'])
-        ->middleware(['auth:sanctum'])
-        ->name('create');
 
     Route::group(['prefix' => '{slug}'], function () {
         Route::get('', [PostController::class, 'get'])->name('get');
 
         Route::group(['prefix' => 'comments'], function () {
             Route::get('', [CommentController::class, 'byPostSlug'])->name('comments');
-            Route::post('', [CommentController::class, 'create'])
-                ->middleware(['auth:sanctum'])
-                ->name('comment');
-            Route::patch('{id}', [CommentController::class, 'update'])
-                ->middleware(['auth:sanctum'])
-                ->name('comment.update');
-            Route::delete('{id}', [CommentController::class, 'delete'])
-                ->middleware(['auth:sanctum'])
-                ->name('comment.delete');
         });
     });
 });
