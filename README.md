@@ -77,6 +77,16 @@ Run the migration with seeders
 docker-compose run php php artisan migrate:fresh --seed
 ```
 
+## Fix issues on laravel write permissions
+Login to php container
+```
+ docker-compose exec php bash
+```
+Add full permissions to the storage directory
+```
+chmod 777 -R storage/
+```
+
 ## PSR2 Coding Style
 Running the coding standards fixer container
 
