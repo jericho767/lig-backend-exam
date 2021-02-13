@@ -1,5 +1,5 @@
 # LIG PH Technical Exam
-The sole purpose of this repository is for the LIG Philippines technical examination of Jericho M. Gimoros.
+The sole purpose of this repository is for the LIG Philippines technical examination of [Jericho M. Gimoros](https://gitlab.com/jericho6367).
 
 ## Specifications / Infrastructure Information
 - Nginx
