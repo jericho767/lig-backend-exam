@@ -3,11 +3,9 @@
 namespace App\Http\Resources;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -20,16 +18,12 @@ class UserResource extends JsonResource
     {
         /** @var User $user */
         $user = $this->resource;
-        /** @var Carbon $createdAt */
-        $createdAt = $user->getAttribute('created_at');
-        /** @var Carbon $updatedAt */
-        $updatedAt = $user->getAttribute('updated_at');
 
         return [
             'name' => $user->getAttribute('name'),
             'email' => $user->getAttribute('email'),
-            'created_at' => $createdAt->format('Y-m-d G:i:s'),
-            'updated_at' => $updatedAt->format('Y-m-d G:i:s'),
+            'created_at' => $this->formatDate($user->getAttribute('created_at')),
+            'updated_at' => $this->formatDate($user->getAttribute('updated_at')),
             'id' => $user->getAttribute('id'),
         ];
     }

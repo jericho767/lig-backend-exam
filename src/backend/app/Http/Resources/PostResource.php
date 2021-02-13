@@ -4,11 +4,9 @@ namespace App\Http\Resources;
 
 use App\Models\Image;
 use App\Models\Post;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class PostResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -21,12 +19,6 @@ class PostResource extends JsonResource
     {
         /** @var Post $post */
         $post = $this->resource;
-        /** @var Carbon $createdAt */
-        $createdAt = $post->getAttribute('created_at');
-        /** @var Carbon $updatedAt */
-        $updatedAt = $post->getAttribute('updated_at');
-        /** @var Carbon $deletedAt */
-        $deletedAt = $post->getAttribute('deleted_at');
 
         return [
             'id' => $post->getAttribute('id'),
@@ -34,9 +26,9 @@ class PostResource extends JsonResource
             'title' => $post->getAttribute('title'),
             'content' => $post->getAttribute('content'),
             'slug' => $post->getAttribute('slug'),
-            'created_at' => $createdAt ? $createdAt->format('Y-m-d G:i:s') : null,
-            'updated_at' => $updatedAt ? $updatedAt->format('Y-m-d G:i:s') : null,
-            'deleted_at' => $deletedAt ? $deletedAt->format('Y-m-d G:i:s') : null,
+            'created_at' => $this->formatDate($post->getAttribute('created_at')),
+            'updated_at' => $this->formatDate($post->getAttribute('updated_at')),
+            'deleted_at' => $this->formatDate($post->getAttribute('deleted_at')),
             'image' => $this->when($post->relationLoaded('image'), function () use ($post) {
                 /** @var Image $image */
                 $image = $post->getRelation('image');

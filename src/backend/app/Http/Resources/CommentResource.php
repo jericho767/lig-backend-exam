@@ -3,11 +3,9 @@
 namespace App\Http\Resources;
 
 use App\Models\Comment;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class CommentResource extends JsonResource
+class CommentResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -20,10 +18,6 @@ class CommentResource extends JsonResource
     {
         /** @var Comment $comment */
         $comment = $this->resource;
-        /** @var Carbon $createdAt */
-        $createdAt = $comment->getAttribute('created_at');
-        /** @var Carbon $updatedAt */
-        $updatedAt = $comment->getAttribute('updated_at');
 
         return [
             'id' => $comment->getAttribute('id'),
@@ -34,8 +28,8 @@ class CommentResource extends JsonResource
             'commentable_id' => $comment->getAttribute('commentable_id'),
             'creator_id' => $comment->getAttribute('creator_id'),
             'parent_id' => $comment->getAttribute('parent_id'),
-            'created_at' => $createdAt->format('Y-m-d G:i:s'),
-            'updated_at' => $updatedAt->format('Y-m-d G:i:s'),
+            'created_at' => $this->formatDate($comment->getAttribute('created_at')),
+            'updated_at' => $this->formatDate($comment->getAttribute('updated_at')),
         ];
     }
 }
