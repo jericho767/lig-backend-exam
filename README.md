@@ -76,6 +76,10 @@ Run the migration with seeders
 ```
 docker-compose run php php artisan migrate:fresh --seed
 ```
+Execute composer autoload
+```
+docker-compose run composer dump-autoload
+```
 
 ## Fix issues on laravel write permissions
 Login to php container
