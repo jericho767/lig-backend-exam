@@ -23,7 +23,7 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $title = $this->faker->realText($this->faker->numberBetween(10, 20));
+        $title = $this->getTitle();
 
         return [
             'user_id' => User::factory(),
@@ -31,5 +31,20 @@ class PostFactory extends Factory
             'slug' => Str::slug($title),
             'content' => $this->faker->realText($this->faker->numberBetween(30, 150)),
         ];
+    }
+
+    /**
+     * For the sake of the design and implementation of the `slug` property
+     * the title of the post will be unique.
+     *
+     * @return string
+     */
+    private function getTitle(): string
+    {
+        do {
+            $title = $this->faker->realText($this->faker->numberBetween(10, 20));
+        } while (Post::query()->where('slug', Str::slug($title))->exists());
+
+        return $title;
     }
 }
