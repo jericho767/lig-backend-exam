@@ -9,13 +9,13 @@ use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
-    private $authService;
+    private $userService;
 
     public function __construct(UserService $service)
     {
-        $this->authService = $service;
+        $this->userService = $service;
     }
 
     /**
@@ -26,7 +26,7 @@ class AuthController extends Controller
      */
     public function register(RegisterUserRequest $request): UserResource
     {
-        return UserResource::make($this->authService->create([
+        return UserResource::make($this->userService->create([
             'email' => $request->getEmail(),
             'name' => $request->getName(),
             'password' => $request->getPassword(),
@@ -44,7 +44,7 @@ class AuthController extends Controller
     {
         $request->authenticate();
         // Fetch API token for the authenticated user
-        $token = $this->authService->createToken($request->user());
+        $token = $this->userService->createToken($request->user());
         // Add user to the resulting array
         $token['user'] = $request->user();
 
@@ -56,6 +56,6 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        $this->authService->deleteAllUserTokens(request()->user());
+        $this->userService->deleteAllUserTokens(request()->user());
     }
 }
