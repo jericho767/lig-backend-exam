@@ -11,6 +11,35 @@ use Illuminate\Database\Eloquent\Collection;
 class CommentService
 {
     /**
+     * Get a comment by ID.
+     *
+     * @param int $id
+     * @return Comment|null
+     */
+    public function getCommentById(int $id): ?Comment
+    {
+        /** @var Comment $comment */
+        $comment = Comment::query()->find($id);
+
+        return $comment;
+    }
+
+    /**
+     * Update a comment.
+     *
+     * @param string $body
+     * @param int $id
+     * @return Comment
+     */
+    public function update(string $body, int $id): Comment
+    {
+        $comment = $this->getCommentById($id);
+        $comment->update(['body' => $body]);
+
+        return $comment;
+    }
+
+    /**
      * Create a comment.
      *
      * @param string $body

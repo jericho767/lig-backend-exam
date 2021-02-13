@@ -28,9 +28,15 @@ Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
 
     Route::group(['prefix' => '{slug}'], function () {
         Route::get('', [PostController::class, 'get'])->name('get');
-        Route::get('comments', [CommentController::class, 'byPostSlug'])->name('comments');
-        Route::post('comments', [CommentController::class, 'comment'])
-            ->middleware(['auth:sanctum'])
-            ->name('comment');
+
+        Route::group(['prefix' => 'comments'], function () {
+            Route::get('', [CommentController::class, 'byPostSlug'])->name('comments');
+            Route::post('', [CommentController::class, 'comment'])
+                ->middleware(['auth:sanctum'])
+                ->name('comment');
+            Route::patch('{id}', [CommentController::class, 'updateComment'])
+                ->middleware(['auth:sanctum'])
+                ->name('comment.update');
+        });
     });
 });

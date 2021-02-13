@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\SlugPostRequest;
+use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Resources\CommentResource;
 use App\Services\CommentService;
 use App\Services\PostService;
@@ -45,5 +46,16 @@ class CommentController extends Controller
                 $this->postService->getPost($request->getSlug()),
                 $request->user())
         );
+    }
+
+    /**
+     * Update a comment.
+     *
+     * @param UpdateCommentRequest $request
+     * @return CommentResource
+     */
+    public function updateComment(UpdateCommentRequest $request): CommentResource
+    {
+        return CommentResource::make($this->commentService->update($request->getBody(), $request->getId()));
     }
 }
