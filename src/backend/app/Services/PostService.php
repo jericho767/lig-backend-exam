@@ -72,7 +72,7 @@ class PostService
         $slug = $slugBase;
         $counter = 1;
 
-        while (Post::query()->where('slug', $slug)->exists()) {
+        while (Post::query()->where('slug', $slug)->withTrashed()->exists()) {
             $slug = $slugBase . '-' . $counter;
             $counter++;
         }
