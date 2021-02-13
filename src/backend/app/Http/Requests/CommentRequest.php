@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Post;
 use Illuminate\Validation\Rule;
 
-class CommentRequest extends GetPostRequest
+class CommentRequest extends SlugPostRequest
 {
     /**
      * Determine if the user is authorized to make this request.

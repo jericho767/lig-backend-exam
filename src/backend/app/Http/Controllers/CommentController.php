@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
-use App\Http\Requests\GetPostRequest;
+use App\Http\Requests\SlugPostRequest;
 use App\Http\Resources\CommentResource;
 use App\Services\CommentService;
 use App\Services\PostService;
@@ -23,10 +23,10 @@ class CommentController extends Controller
     /**
      * Get the comments of a post given a slug.
      *
-     * @param GetPostRequest $request
+     * @param SlugPostRequest $request
      * @return AnonymousResourceCollection
      */
-    public function byPostSlug(GetPostRequest $request): AnonymousResourceCollection
+    public function byPostSlug(SlugPostRequest $request): AnonymousResourceCollection
     {
         return CommentResource::collection($this->commentService->getAllByPost($request->getSlug()));
     }

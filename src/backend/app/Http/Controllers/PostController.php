@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GetPostRequest;
+use App\Http\Requests\SlugPostRequest;
 use App\Http\Resources\PostResource;
 use App\Services\PostService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -29,10 +29,10 @@ class PostController extends Controller
     /**
      * Get the post given the slug.
      *
-     * @param GetPostRequest $request
+     * @param SlugPostRequest $request
      * @return PostResource
      */
-    public function get(GetPostRequest $request): PostResource
+    public function get(SlugPostRequest $request): PostResource
     {
         return PostResource::make($this->postService->getPost($request->getSlug()));
     }
