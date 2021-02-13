@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
@@ -31,7 +32,7 @@ class Post extends Model
     }
 
     /**
-     * Relationship methods to fetch comments to the post.
+     * Relationship method to fetch comments to the post.
      *
      * @return MorphMany
      */
@@ -42,6 +43,21 @@ class Post extends Model
             'commentable',
             'commentable_type',
             'commentable_id'
+        );
+    }
+
+    /**
+     * Relationship method to fetch the image of the post.
+     *
+     * @return MorphOne
+     */
+    public function image(): MorphOne
+    {
+        return $this->morphOne(
+            Image::class,
+            'imageable',
+            'imageable_type',
+            'imageable_id',
         );
     }
 }

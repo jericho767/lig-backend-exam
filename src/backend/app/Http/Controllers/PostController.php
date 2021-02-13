@@ -28,6 +28,7 @@ class PostController extends Controller
 
     /**
      * Get the post given the slug.
+     *
      * @param GetPostRequest $request
      * @return PostResource
      */

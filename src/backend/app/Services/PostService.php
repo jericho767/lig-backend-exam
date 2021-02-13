@@ -16,6 +16,7 @@ class PostService
     public function get(int $page): LengthAwarePaginator
     {
         return Post::query()
+            ->with(['image'])
             ->forPage($page)
             ->paginate();
     }
@@ -30,6 +31,7 @@ class PostService
     {
         /** @var Post $post */
         $post = Post::query()
+            ->with(['image'])
             ->where('slug', $slug)
             ->firstOrFail();
 
