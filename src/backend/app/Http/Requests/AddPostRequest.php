@@ -7,6 +7,24 @@ use Illuminate\Foundation\Http\FormRequest;
 class AddPostRequest extends FormRequest
 {
     /**
+     * Rules of creating/updating a post.
+     */
+    const POST_RULES = [
+        'title' => [
+            'required',
+            'max:20',
+        ],
+        'content' => [
+            'required',
+            'max:200',
+        ],
+        'image' => [
+            'required',
+            'max:200',
+        ],
+    ];
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -23,20 +41,7 @@ class AddPostRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => [
-                'required',
-                'max:20',
-            ],
-            'content' => [
-                'required',
-                'max:200',
-            ],
-            'image' => [
-                'required',
-                'max:200',
-            ],
-        ];
+        return self::POST_RULES;
     }
 
     /**

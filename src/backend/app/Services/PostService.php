@@ -10,6 +10,24 @@ use Illuminate\Support\Str;
 class PostService
 {
     /**
+     * Update a post title given a post slug.
+     *
+     * @param string $slug
+     * @param string $title
+     * @return Post
+     */
+    public function updateTitle(string $slug, string $title): Post
+    {
+        $post = $this->getPost($slug);
+        $post->update([
+            'title' => $title,
+            'slug' => $this->createSlug($title),
+        ]);
+
+        return $post;
+    }
+
+    /**
      * Create a post.
      *
      * @param array $data
@@ -67,15 +85,15 @@ class PostService
      * Get a post given a slug.
      *
      * @param string $slug
-     * @return Post
+     * @return Post|null
      */
-    public function getPost(string $slug): Post
+    public function getPost(string $slug): ?Post
     {
         /** @var Post $post */
         $post = Post::query()
             ->with(['image'])
             ->where('slug', $slug)
-            ->firstOrFail();
+            ->first();
 
         return $post;
     }

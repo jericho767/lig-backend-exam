@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddPostRequest;
+use App\Http\Requests\ModifyPostRequest;
 use App\Http\Requests\SlugPostRequest;
 use App\Http\Resources\PostResource;
 use App\Services\ImageService;
@@ -66,5 +67,16 @@ class PostController extends Controller
         $post->load('image');
 
         return PostResource::make($post);
+    }
+
+    /**
+     * Update a post.
+     *
+     * @param ModifyPostRequest $request
+     * @return PostResource
+     */
+    public function update(ModifyPostRequest $request): PostResource
+    {
+        return PostResource::make($this->postService->updateTitle($request->getSlug(), $request->getTitle()));
     }
 }
