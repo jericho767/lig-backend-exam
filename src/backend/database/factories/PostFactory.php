@@ -42,8 +42,8 @@ class PostFactory extends Factory
     private function getTitle(): string
     {
         do {
-            $title = $this->faker->realText($this->faker->numberBetween(10, 20));
-        } while (Post::query()->where('slug', Str::slug($title))->exists());
+            $title = $this->faker->bothify($this->faker->realText($this->faker->numberBetween(10, 20)));
+        } while (Post::query()->where('slug', Str::slug($title))->exists() || empty(trim($title)));
 
         return $title;
     }
