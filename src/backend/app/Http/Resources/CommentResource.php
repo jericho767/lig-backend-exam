@@ -21,7 +21,6 @@ class CommentResource extends BaseResource
 
         return [
             'id' => $comment->getAttribute('id'),
-            // This part I need to understand this why is this here
             'title' => null,
             'body' => $comment->getAttribute('body'),
             'commentable_type' => $comment->getAttribute('commentable_type'),
