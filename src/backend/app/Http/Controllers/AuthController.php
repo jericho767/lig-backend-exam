@@ -33,4 +33,12 @@ class AuthController extends Controller
 
         return LoginResource::make($token);
     }
+
+    /**
+     * Logs user out.
+     */
+    public function logout()
+    {
+        $this->authService->deleteAllUserTokens(request()->user());
+    }
 }

@@ -9,6 +9,16 @@ use Laravel\Sanctum\NewAccessToken;
 class AuthService
 {
     /**
+     * Deletes all the user's tokens.
+     *
+     * @param User $user
+     */
+    public function deleteAllUserTokens(User $user)
+    {
+        $user->tokens()->delete();
+    }
+
+    /**
      * Create a token for the user and returns it with the expiration date.
      *
      * @param User $user
@@ -33,6 +43,7 @@ class AuthService
     private function getTokenExpiry(NewAccessToken $accessToken): ?Carbon
     {
         $expiration = config('sanctum.expiration');
+
         if ($expiration === null) {
             return null;
         } else {
