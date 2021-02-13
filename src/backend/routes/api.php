@@ -34,10 +34,10 @@ Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
 
         Route::group(['prefix' => 'comments'], function () {
             Route::get('', [CommentController::class, 'byPostSlug'])->name('comments');
-            Route::post('', [CommentController::class, 'comment'])
+            Route::post('', [CommentController::class, 'create'])
                 ->middleware(['auth:sanctum'])
                 ->name('comment');
-            Route::patch('{id}', [CommentController::class, 'updateComment'])
+            Route::patch('{id}', [CommentController::class, 'update'])
                 ->middleware(['auth:sanctum'])
                 ->name('comment.update');
             Route::delete('{id}', [CommentController::class, 'delete'])

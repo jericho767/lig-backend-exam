@@ -40,7 +40,7 @@ class CommentController extends Controller
      * @param AddCommentRequest $request
      * @return CommentResource
      */
-    public function comment(AddCommentRequest $request): CommentResource
+    public function create(AddCommentRequest $request): CommentResource
     {
         return CommentResource::make(
             $this->commentService->create(
@@ -56,7 +56,7 @@ class CommentController extends Controller
      * @param ModifyCommentRequest $request
      * @return CommentResource
      */
-    public function updateComment(ModifyCommentRequest $request): CommentResource
+    public function update(ModifyCommentRequest $request): CommentResource
     {
         return CommentResource::make($this->commentService->update($request->getBody(), $request->getId()));
     }
