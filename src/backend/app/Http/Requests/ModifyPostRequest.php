@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use App\Services\PostService;
 
 class ModifyPostRequest extends SlugPostRequest
@@ -31,16 +30,7 @@ class ModifyPostRequest extends SlugPostRequest
      */
     public function authorize(): bool
     {
-        $post = $this->postService->getPost($this->route('slug'));
-
-        if ($post !== null) {
-            /** @var User $user */
-            $user = $this->user();
-
-            return $post->getAttribute('user_id') === $user->getAttribute('id');
-        }
-
-        return false;
+        return true;
     }
 
     /**

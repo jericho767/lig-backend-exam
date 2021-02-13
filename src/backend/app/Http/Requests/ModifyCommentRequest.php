@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Comment;
-use App\Models\User;
 use App\Services\CommentService;
 use Illuminate\Validation\Rule;
 
@@ -33,17 +32,7 @@ class ModifyCommentRequest extends AddCommentRequest
      */
     public function authorize(): bool
     {
-        $comment = $this->commentService->getCommentById(intval($this->route('id')));
-
-        if ($comment) {
-            /** @var User $user */
-            $user = $this->user();
-
-            // Can modify comment only if the user is the owner of the comment
-            return $user->getAttribute('id') === $comment->getAttribute('creator_id');
-        }
-
-        return false;
+        return true;
     }
 
     /**
