@@ -17,14 +17,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Create users and posts
-         User::factory(10)
-             ->has(Post::factory()->count(rand(1, 5)), 'posts')
-             ->create();
-
-         // Create comments for posts
-         Comment::factory()
-             ->count(rand(10, 20))
-             ->for(Post::factory(), 'commentable')
+         User::factory()
+             ->count(rand(1,5))
+             ->has(
+                 Post::factory()
+                     ->count(rand(2,3))
+                     ->has(Comment::factory()->count(rand(1,3)), 'comments'),
+                 'posts'
+             )
              ->create();
     }
 }
