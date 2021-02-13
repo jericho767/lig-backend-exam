@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Post;
+use Illuminate\Validation\Rule;
 
-class CommentRequest extends FormRequest
+class CommentRequest extends GetPostRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,6 +25,10 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'slug' => [
+                'required',
+                Rule::exists((new Post())->getTable(), 'slug'),
+            ],
             'body' => [
                 'required',
                 'max:200',
