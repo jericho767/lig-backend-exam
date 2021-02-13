@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Services\CommentService;
 use Illuminate\Validation\Rule;
 
-class ModifyCommentRequest extends CommentRequest
+class ModifyCommentRequest extends AddCommentRequest
 {
     private $commentService;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class CommentRequest extends SlugPostRequest
+class AddCommentRequest extends SlugPostRequest
 {
     /**
      * Determine if the user is authorized to make this request.

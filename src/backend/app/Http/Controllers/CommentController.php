@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CommentRequest;
+use App\Http\Requests\AddCommentRequest;
 use App\Http\Requests\SlugPostRequest;
 use App\Http\Requests\ModifyCommentRequest;
 use App\Http\Resources\CommentResource;
@@ -37,10 +37,10 @@ class CommentController extends Controller
     /**
      * Create a comment.
      *
-     * @param CommentRequest $request
+     * @param AddCommentRequest $request
      * @return CommentResource
      */
-    public function comment(CommentRequest $request): CommentResource
+    public function comment(AddCommentRequest $request): CommentResource
     {
         return CommentResource::make(
             $this->commentService->create(
