@@ -68,17 +68,13 @@ Create the `.env` file and run the following to generate key for Laravel
 docker-compose run php cp .env.example .env
 docker-compose run php php artisan key:generate
 ```
-Update the `.env` values especially the database credentials then refresh the config
+Update the `.env` values especially the **database credentials** then refresh the config
 ```
 docker-compose run php php artisan config:clear
 ```
-Run the migration
+Run the migration with seeders
 ```
-docker-compose run php php artisan migrate:fresh
-```
-If you have seeders, you can run it by using the following command
-```
-docker-compose run php php artisan db:seed
+docker-compose run php php artisan migrate:fresh --seed
 ```
 
 ## PSR2 Coding Style
