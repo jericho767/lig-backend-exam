@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 Route::group(['prefix' => 'posts', 'as' => 'post.'], function () {
     Route::get('', [PostController::class, 'index'])->name('list');
-    Route::get('{slug}', [PostController::class, 'get'])->name('get');
+
+    Route::group(['prefix' => '{slug}'], function () {
+        Route::get('', [PostController::class, 'get'])->name('get');
+        Route::get('comments', [CommentController::class, 'byPostSlug'])->name('comments');
+    });
 });
