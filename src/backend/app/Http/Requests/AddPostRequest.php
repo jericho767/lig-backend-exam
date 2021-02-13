@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\UploadedFile;
 
-class PostRequest extends FormRequest
+class AddPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class PostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -34,8 +33,8 @@ class PostRequest extends FormRequest
                 'max:200',
             ],
             'image' => [
-                'file',
-                'size:5000' // 5mb
+                'required',
+                'max:200',
             ],
         ];
     }
@@ -63,10 +62,10 @@ class PostRequest extends FormRequest
     /**
      * Getter method for the uploaded image.
      *
-     * @return UploadedFile|null
+     * @return string
      */
-    public function getUploadedImage(): ?UploadedFile
+    public function getImageUrl(): string
     {
-        return $this->file('image');
+        return $this->get('image');
     }
 }
