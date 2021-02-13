@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
              ->has(
                  Post::factory()
                      ->count(rand(2,3))
+                     ->has(Image::factory(), 'image')
                      ->has(Comment::factory()->count(rand(1,3)), 'comments'),
                  'posts'
              )
