@@ -4,10 +4,33 @@ namespace App\Services;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\NewAccessToken;
 
 class AuthService
 {
+    /**
+     * Create user.
+     *
+     * @param array $data
+     * @return User
+     */
+    public function create(array $data): User
+    {
+        $user = new User([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        // Mark email as verified
+        $user->markEmailAsVerified();
+
+        $user->save();
+
+        return $user;
+    }
+
     /**
      * Deletes all the user's tokens.
      *

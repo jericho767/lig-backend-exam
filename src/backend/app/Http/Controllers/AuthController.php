@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\LoginResource;
+use App\Http\Resources\UserResource;
 use App\Services\AuthService;
 use Illuminate\Validation\ValidationException;
 
@@ -14,6 +16,21 @@ class AuthController extends Controller
     public function __construct(AuthService $service)
     {
         $this->authService = $service;
+    }
+
+    /**
+     * Register a user.
+     *
+     * @param RegisterUserRequest $request
+     * @return UserResource
+     */
+    public function register(RegisterUserRequest $request): UserResource
+    {
+        return UserResource::make($this->authService->create([
+            'email' => $request->getEmail(),
+            'name' => $request->getName(),
+            'password' => $request->getPassword(),
+        ]));
     }
 
     /**
